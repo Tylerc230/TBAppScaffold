@@ -6,6 +6,7 @@
 //  Copyright © 2016 13bit consulting. All rights reserved.
 //
 import RxSwift
+import TBAppScaffold
 
 struct RegistrationWiring: Wiring {
     let viewModel = RegistrationViewModel()

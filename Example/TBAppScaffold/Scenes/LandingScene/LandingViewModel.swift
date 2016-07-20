@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxSugar
+import TBAppScaffold
 
 struct LandingViewModel: ViewModel {
     let events = PublishSubject<AppEvent>()

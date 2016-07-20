@@ -6,6 +6,8 @@
 //  Copyright © 2016 13bit consulting. All rights reserved.
 //
 import RxSwift
+import TBAppScaffold
+
 struct MainAppViewModel: ViewModel {
     let events = PublishSubject<AppEvent>()
     

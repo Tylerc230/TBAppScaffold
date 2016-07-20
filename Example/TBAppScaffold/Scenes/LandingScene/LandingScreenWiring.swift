@@ -7,6 +7,8 @@
 //
 
 import RxSwift
+import TBAppScaffold
+
 struct LandingScreenWiring: Wiring {
     let viewModel = LandingViewModel()
     func wire(landingView: LandingViewController) {

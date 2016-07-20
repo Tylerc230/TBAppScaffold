@@ -11,16 +11,16 @@ import RxSwiftExt
 import RxCocoa
 import RxSugar
 
-class Router<Event> {
-    typealias SourcedEvent = (source: UIViewController, event: Event)
-    typealias EventTransitionMap = SourcedEvent -> AnyTransition<Event>
+public class Router<Event> {
+    public typealias SourcedEvent = (source: UIViewController, event: Event)
+    public typealias EventTransitionMap = SourcedEvent -> AnyTransition<Event>
     let disposeBag = DisposeBag()
     let currentEventStream = PublishSubject<SourcedEvent>()
-    init(eventTransitionMap: EventTransitionMap) {
+    public init(eventTransitionMap: EventTransitionMap) {
         setupRx(eventTransitionMap)
     }
     
-    func sendEvent(event: Event, withSource source: UIViewController) {
+    public func sendEvent(event: Event, withSource source: UIViewController) {
         currentEventStream.onNext((source, event))
     }
     

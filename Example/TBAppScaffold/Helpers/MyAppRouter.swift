@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import TBAppScaffold
 
-enum SegueId:  String {
+enum SegueId: String, SegueIdType {
     case registrationSegue, signUpSegue, mainAppSegue
+    var identifier: String {
+        return self.rawValue
+    }
 }
 
 enum AppEvent {
@@ -21,18 +25,19 @@ func transitionForEvent(source: UIViewController, event: AppEvent) -> AnyTransit
     switch event {
     case .registrationComplete, .signInComplete:
         let wiring = MainAppWiring()
-        let transition = SegueTransition(sourceViewController: sourceViewController, segueId: .mainAppSegue, wiring: wiring)
+        let transition = SegueTransition(sourceViewController: sourceViewController, segueId: SegueId.mainAppSegue, wiring: wiring)
         return AnyTransition(transition: transition)
     case .signInSelected:
         let wiring = SignInWiring()
-        let transition = SegueTransition(sourceViewController: sourceViewController, segueId: .signUpSegue, wiring: wiring)
+        let transition = SegueTransition(sourceViewController: sourceViewController, segueId: SegueId.signUpSegue, wiring: wiring)
         return AnyTransition(transition: transition)
     case .registrationSelected:
         let wiring = RegistrationWiring()
-        let transition = SegueTransition(sourceViewController: sourceViewController, segueId: .registrationSegue, wiring: wiring)
+        let transition = SegueTransition(sourceViewController: sourceViewController, segueId: SegueId.registrationSegue, wiring: wiring)
         return AnyTransition(transition: transition)
     case .appLaunched:
-        let transition = ManualTransition(sourceViewController: sourceViewController, wiring: LandingScreenWiring()) {
+        let wiring = LandingScreenWiring()
+        let transition = ManualTransition(sourceViewController: sourceViewController, wiring: wiring) {
             guard let navController = sourceViewController as? UINavigationController else {
                 fatalError()
             }
@@ -40,5 +45,6 @@ func transitionForEvent(source: UIViewController, event: AppEvent) -> AnyTransit
         }
         return AnyTransition(transition: transition)
     }
+    
     
 }

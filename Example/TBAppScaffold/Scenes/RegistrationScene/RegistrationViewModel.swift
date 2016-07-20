@@ -9,6 +9,8 @@
 
 import RxSwift
 import RxSugar
+import TBAppScaffold
+
 enum FieldState {
     case unset, invalid, valid
 }

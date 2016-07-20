@@ -7,7 +7,7 @@
 //
 
 import RxSwift
-protocol ViewModel {
+public protocol ViewModel {
     associatedtype Event
     var events: PublishSubject<Event> { get }
 }

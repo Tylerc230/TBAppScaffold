@@ -6,7 +6,7 @@
 //  Copyright © 2016 13bit consulting. All rights reserved.
 //
 import RxSwift
-protocol Wiring {
+public protocol Wiring {
     associatedtype ViewController: UIViewController
     associatedtype Model: ViewModel
     func wire(viewController: ViewController)
@@ -14,7 +14,7 @@ protocol Wiring {
     var viewModel: Model { get }
 }
 
-extension Wiring {
+public extension Wiring {
     func eventStream() -> Observable<Model.Event> {
         return viewModel.events
     }

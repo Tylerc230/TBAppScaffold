@@ -7,6 +7,8 @@
 //
 
 import RxSwift
+import TBAppScaffold
+
 struct SignInViewModel: ViewModel {
     var events = PublishSubject<AppEvent>()
 }

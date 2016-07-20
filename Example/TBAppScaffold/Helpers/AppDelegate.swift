@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import TBAppScaffold
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

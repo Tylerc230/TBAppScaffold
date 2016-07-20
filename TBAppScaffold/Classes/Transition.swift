@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-protocol Transition {
+public protocol Transition {
     associatedtype W: Wiring
     var wiring: W { get }
     func performTransition() -> Observable<UIViewController>
@@ -17,7 +17,7 @@ protocol Transition {
 }
 
 extension Transition {
-    func eventStream() -> Observable<W.Model.Event> {
+    public func eventStream() -> Observable<W.Model.Event> {
         return wiring.eventStream()
     }
     
@@ -28,11 +28,11 @@ extension Transition {
     }
 }
 
-struct AnyTransition<Event> {
+public struct AnyTransition<Event> {
     let performTransitionClosure: () -> (Observable<UIViewController>)
     let eventStreamClosure: () -> Observable<Event>
     let wireViewModelClosure: (viewController: UIViewController) -> (Observable<UIViewController>)
-    init<T: Transition where T.W.Model.Event == Event>(transition: T) {
+    public init<T: Transition where T.W.Model.Event == Event>(transition: T) {
         performTransitionClosure = transition.performTransition
         eventStreamClosure = transition.eventStream
         wireViewModelClosure = { viewController in

@@ -7,6 +7,8 @@
 //
 
 import RxSwift
+import TBAppScaffold
+
 struct SignInWiring: Wiring {
     let viewModel = SignInViewModel()
     func wire(viewController: SignInViewController) {
