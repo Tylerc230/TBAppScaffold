@@ -9,11 +9,23 @@
 /* Begin PBXBuildFile section */
 		02E77AF6B02F5129AA3E819E /* Pods_TBAppScaffold_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8185B5D97B42DA332AE89FC1 /* Pods_TBAppScaffold_Tests.framework */; };
 		0EF94D4C5B3D07D076A0A05C /* Pods_TBAppScaffold_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6259EAD595CE0C28184414F5 /* Pods_TBAppScaffold_Example.framework */; };
-		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
+		2FA635F11D4029C00085F815 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635EF1D4029C00085F815 /* AppDelegate.swift */; };
+		2FA635F21D4029C00085F815 /* MyAppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635F01D4029C00085F815 /* MyAppRouter.swift */; };
+		2FA636041D4029D00085F815 /* LandingScreenWiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635F51D4029D00085F815 /* LandingScreenWiring.swift */; };
+		2FA636051D4029D00085F815 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635F61D4029D00085F815 /* LandingViewController.swift */; };
+		2FA636061D4029D00085F815 /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635F71D4029D00085F815 /* LandingViewModel.swift */; };
+		2FA636071D4029D00085F815 /* MainAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635F91D4029D00085F815 /* MainAppViewController.swift */; };
+		2FA636081D4029D00085F815 /* MainAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635FA1D4029D00085F815 /* MainAppViewModel.swift */; };
+		2FA636091D4029D00085F815 /* MainAppWiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635FB1D4029D00085F815 /* MainAppWiring.swift */; };
+		2FA6360A1D4029D00085F815 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635FD1D4029D00085F815 /* RegistrationViewController.swift */; };
+		2FA6360B1D4029D00085F815 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635FE1D4029D00085F815 /* RegistrationViewModel.swift */; };
+		2FA6360C1D4029D00085F815 /* RegistrationWiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA635FF1D4029D00085F815 /* RegistrationWiring.swift */; };
+		2FA6360D1D4029D00085F815 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA636011D4029D00085F815 /* SignInViewController.swift */; };
+		2FA6360E1D4029D00085F815 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA636021D4029D00085F815 /* SignInViewModel.swift */; };
+		2FA6360F1D4029D00085F815 /* SignInWiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FA636031D4029D00085F815 /* SignInWiring.swift */; };
+		2FA636121D402A130085F815 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FA636101D402A130085F815 /* LaunchScreen.storyboard */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
-		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,13 +41,25 @@
 
 /* Begin PBXFileReference section */
 		1D40D31726600A9E26FB0D8C /* Pods-TBAppScaffold_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TBAppScaffold_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TBAppScaffold_Tests/Pods-TBAppScaffold_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		2FA635EF1D4029C00085F815 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2FA635F01D4029C00085F815 /* MyAppRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAppRouter.swift; sourceTree = "<group>"; };
+		2FA635F51D4029D00085F815 /* LandingScreenWiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingScreenWiring.swift; sourceTree = "<group>"; };
+		2FA635F61D4029D00085F815 /* LandingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
+		2FA635F71D4029D00085F815 /* LandingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
+		2FA635F91D4029D00085F815 /* MainAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppViewController.swift; sourceTree = "<group>"; };
+		2FA635FA1D4029D00085F815 /* MainAppViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppViewModel.swift; sourceTree = "<group>"; };
+		2FA635FB1D4029D00085F815 /* MainAppWiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAppWiring.swift; sourceTree = "<group>"; };
+		2FA635FD1D4029D00085F815 /* RegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		2FA635FE1D4029D00085F815 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
+		2FA635FF1D4029D00085F815 /* RegistrationWiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationWiring.swift; sourceTree = "<group>"; };
+		2FA636011D4029D00085F815 /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		2FA636021D4029D00085F815 /* SignInViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		2FA636031D4029D00085F815 /* SignInWiring.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInWiring.swift; sourceTree = "<group>"; };
+		2FA636111D402A130085F815 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* TBAppScaffold_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TBAppScaffold_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		607FACE51AFB9204008FA782 /* TBAppScaffold_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TBAppScaffold_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -69,6 +93,66 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2FA635EE1D4029C00085F815 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				2FA635EF1D4029C00085F815 /* AppDelegate.swift */,
+				2FA635F01D4029C00085F815 /* MyAppRouter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		2FA635F31D4029D00085F815 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				2FA635F41D4029D00085F815 /* LandingScene */,
+				2FA635F81D4029D00085F815 /* MainAppScene */,
+				2FA635FC1D4029D00085F815 /* RegistrationScene */,
+				2FA636001D4029D00085F815 /* SignInScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		2FA635F41D4029D00085F815 /* LandingScene */ = {
+			isa = PBXGroup;
+			children = (
+				2FA635F51D4029D00085F815 /* LandingScreenWiring.swift */,
+				2FA635F61D4029D00085F815 /* LandingViewController.swift */,
+				2FA635F71D4029D00085F815 /* LandingViewModel.swift */,
+			);
+			path = LandingScene;
+			sourceTree = "<group>";
+		};
+		2FA635F81D4029D00085F815 /* MainAppScene */ = {
+			isa = PBXGroup;
+			children = (
+				2FA635F91D4029D00085F815 /* MainAppViewController.swift */,
+				2FA635FA1D4029D00085F815 /* MainAppViewModel.swift */,
+				2FA635FB1D4029D00085F815 /* MainAppWiring.swift */,
+			);
+			path = MainAppScene;
+			sourceTree = "<group>";
+		};
+		2FA635FC1D4029D00085F815 /* RegistrationScene */ = {
+			isa = PBXGroup;
+			children = (
+				2FA635FD1D4029D00085F815 /* RegistrationViewController.swift */,
+				2FA635FE1D4029D00085F815 /* RegistrationViewModel.swift */,
+				2FA635FF1D4029D00085F815 /* RegistrationWiring.swift */,
+			);
+			path = RegistrationScene;
+			sourceTree = "<group>";
+		};
+		2FA636001D4029D00085F815 /* SignInScene */ = {
+			isa = PBXGroup;
+			children = (
+				2FA636011D4029D00085F815 /* SignInViewController.swift */,
+				2FA636021D4029D00085F815 /* SignInViewModel.swift */,
+				2FA636031D4029D00085F815 /* SignInWiring.swift */,
+			);
+			path = SignInScene;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -93,11 +177,11 @@
 		607FACD21AFB9204008FA782 /* Example for TBAppScaffold */ = {
 			isa = PBXGroup;
 			children = (
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				2FA635F31D4029D00085F815 /* Scenes */,
+				2FA635EE1D4029C00085F815 /* Helpers */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
+				2FA636101D402A130085F815 /* LaunchScreen.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
-				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for TBAppScaffold";
@@ -246,8 +330,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FA636121D402A130085F815 /* LaunchScreen.storyboard in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,8 +443,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
-				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				2FA636041D4029D00085F815 /* LandingScreenWiring.swift in Sources */,
+				2FA636071D4029D00085F815 /* MainAppViewController.swift in Sources */,
+				2FA636061D4029D00085F815 /* LandingViewModel.swift in Sources */,
+				2FA6360C1D4029D00085F815 /* RegistrationWiring.swift in Sources */,
+				2FA6360E1D4029D00085F815 /* SignInViewModel.swift in Sources */,
+				2FA6360A1D4029D00085F815 /* RegistrationViewController.swift in Sources */,
+				2FA635F21D4029C00085F815 /* MyAppRouter.swift in Sources */,
+				2FA6360B1D4029D00085F815 /* RegistrationViewModel.swift in Sources */,
+				2FA636091D4029D00085F815 /* MainAppWiring.swift in Sources */,
+				2FA6360D1D4029D00085F815 /* SignInViewController.swift in Sources */,
+				2FA636051D4029D00085F815 /* LandingViewController.swift in Sources */,
+				2FA636081D4029D00085F815 /* MainAppViewModel.swift in Sources */,
+				2FA635F11D4029C00085F815 /* AppDelegate.swift in Sources */,
+				2FA6360F1D4029D00085F815 /* SignInWiring.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,20 +479,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2FA636101D402A130085F815 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2FA636111D402A130085F815 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				607FACDA1AFB9204008FA782 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		607FACDE1AFB9204008FA782 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				607FACDF1AFB9204008FA782 /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
