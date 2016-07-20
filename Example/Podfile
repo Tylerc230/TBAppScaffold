@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'TBAppScaffold_Example' do
+  pod 'TBAppScaffold', :path => '../'
+
+  target 'TBAppScaffold_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
