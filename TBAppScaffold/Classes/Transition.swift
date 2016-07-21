@@ -21,22 +21,20 @@ extension Transition {
         return wiring.eventStream()
     }
     
-    func wireViewModel(to destination: W.ViewController) -> Observable<UIViewController> {
-        return destination.viewLoaded.doOnNext { _ in
-            self.wiring.wire(destination)
-        }
+    func wireViewModel(to destination: W.ViewController) {
+        self.wiring.wire(destination)
     }
 }
 
 public struct AnyTransition<Event> {
     let performTransitionClosure: () -> (Observable<UIViewController>)
     let eventStreamClosure: () -> Observable<Event>
-    let wireViewModelClosure: (viewController: UIViewController) -> (Observable<UIViewController>)
+    let wireViewModelClosure: (viewController: UIViewController) -> ()
     public init<T: Transition where T.W.Model.Event == Event>(transition: T) {
         performTransitionClosure = transition.performTransition
         eventStreamClosure = transition.eventStream
         wireViewModelClosure = { viewController in
-            return transition.wireViewModel(to: viewController as! T.W.ViewController)
+            transition.wireViewModel(to: viewController as! T.W.ViewController)
         }
     }
     
@@ -44,7 +42,7 @@ public struct AnyTransition<Event> {
         return performTransitionClosure()
     }
     
-    func wireViewModel(to viewController: UIViewController) -> Observable<UIViewController> {
+    func wireViewModel(to viewController: UIViewController) {
         return wireViewModelClosure(viewController: viewController)
     }
     

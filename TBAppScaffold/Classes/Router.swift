@@ -31,8 +31,11 @@ public class Router<Event> {
             .flatMap{ (transition)  in
                 return transition.performTransition().map {destination in (transition, destination) }
             }
+            .flatMap{ transition, destination in
+                return destination.viewLoaded.map { _ in (transition, destination) }
+            }
             .doOnNext { (transition, destination) in
-                transition.wireViewModel(to: destination)
+                return transition.wireViewModel(to: destination)
             }
             .subscribeNext{ (transition, destination) in
                 self.addNewEventStream(transition, destination: destination)
