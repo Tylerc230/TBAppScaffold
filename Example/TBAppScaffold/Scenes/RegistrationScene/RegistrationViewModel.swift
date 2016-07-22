@@ -30,13 +30,13 @@ struct RegistrationViewModel: ViewModel {
     private let confPasswordTextStream = PublishSubject<String>()
     private let disposeBag = DisposeBag()
     init() {
-        nameStateStream = nameTextStream.map(validName)
-        emailStateStream = emailTextStream.map (validEmail)
-        passwordStateStream = passwordTextStream.map (validPassword)
+        nameStateStream = nameTextStream.map(validName).startWith(.unset)
+        emailStateStream = emailTextStream.map (validEmail).startWith(.unset)
+        passwordStateStream = passwordTextStream.map (validPassword).startWith(.unset)
         confPasswordStateStream = Observable.combineLatest(passwordTextStream, confPasswordTextStream) {
             return ($0, $1)
             }
-            .map (validConfPassword)
+            .map (validConfPassword).startWith(.unset)
         
         signUpButtonEnabledStream = [nameStateStream, emailStateStream, passwordStateStream, confPasswordStateStream].combineLatest { states in
             return states.reduce(true, combine: allValid)
