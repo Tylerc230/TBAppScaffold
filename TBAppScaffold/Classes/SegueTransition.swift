@@ -1,6 +1,6 @@
 //
 //  SegueTransition.swift
-//  ArchitectureTest
+//  TBAppScaffold
 //
 //  Created by Tyler Casselman on 6/30/16.
 //  Copyright © 2016 13bit consulting. All rights reserved.
