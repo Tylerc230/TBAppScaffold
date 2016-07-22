@@ -10,6 +10,7 @@
 import RxSwift
 import RxSugar
 import TBAppScaffold
+import RxSwiftExt
 
 enum FieldState {
     case unset, invalid, valid
@@ -18,22 +19,22 @@ enum FieldState {
 struct RegistrationViewModel: ViewModel {
     //Outgoing streams
     var nameStateStream: Observable<FieldState> {
-        return nameTextStream.map(validName).startWith(.unset)
+        return nameTextStream.map(validName)
     }
     
     var emailStateStream: Observable<FieldState> {
-        return emailTextStream.map (validEmail).startWith(.unset)
+        return emailTextStream.map (validEmail)
     }
     
     var passwordStateStream: Observable<FieldState> {
-        return passwordTextStream.map (validPassword).startWith(.unset)
+        return passwordTextStream.map (validPassword)
     }
     
     var confPasswordStateStream: Observable<FieldState> {
         return Observable.combineLatest(passwordTextStream, confPasswordTextStream) {
             return ($0, $1)
             }
-            .map (validConfPassword).startWith(.unset)
+            .map (validConfPassword)
     }
     
     var signUpButtonEnabledStream: Observable<Bool> {
@@ -44,15 +45,16 @@ struct RegistrationViewModel: ViewModel {
     
     var events: Observable<AppEvent> {
         return signupTappedStream
+            .filter { $0 }
             .map { _ in return AppEvent.registrationComplete }
     }
     
     //incoming streams
-    let nameTextStream = PublishSubject<String>()
-    let emailTextStream = PublishSubject<String>()
-    let passwordTextStream = PublishSubject<String>()
-    let confPasswordTextStream = PublishSubject<String>()
-    let signupTappedStream = PublishSubject<Bool>()
+    let nameTextStream = BehaviorSubject<String>(value: "")
+    let emailTextStream = BehaviorSubject<String>(value: "")
+    let passwordTextStream = BehaviorSubject<String>(value: "")
+    let confPasswordTextStream = BehaviorSubject<String>(value: "")
+    let signupTappedStream = BehaviorSubject<Bool>(value: false)
 }
 
 private func validName(name: String) -> FieldState {
