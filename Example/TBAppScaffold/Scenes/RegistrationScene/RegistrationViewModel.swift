@@ -17,43 +17,45 @@ enum FieldState {
 
 struct RegistrationViewModel: ViewModel {
     //Outgoing streams
-    let nameStateStream: Observable<FieldState>
-    let emailStateStream: Observable<FieldState>
-    let passwordStateStream: Observable<FieldState>
-    let confPasswordStateStream: Observable<FieldState>
-    let signUpButtonEnabledStream: Observable<Bool>
-    let events = PublishSubject<AppEvent>()
-    //incoming streams
-    private let nameTextStream = PublishSubject<String>()
-    private let emailTextStream = PublishSubject<String>()
-    private let passwordTextStream = PublishSubject<String>()
-    private let confPasswordTextStream = PublishSubject<String>()
-    private let disposeBag = DisposeBag()
-    init() {
-        nameStateStream = nameTextStream.map(validName).startWith(.unset)
-        emailStateStream = emailTextStream.map (validEmail).startWith(.unset)
-        passwordStateStream = passwordTextStream.map (validPassword).startWith(.unset)
-        confPasswordStateStream = Observable.combineLatest(passwordTextStream, confPasswordTextStream) {
+    var nameStateStream: Observable<FieldState> {
+        return nameTextStream.map(validName).startWith(.unset)
+    }
+    
+    var emailStateStream: Observable<FieldState> {
+        return emailTextStream.map (validEmail).startWith(.unset)
+    }
+    
+    var passwordStateStream: Observable<FieldState> {
+        return passwordTextStream.map (validPassword).startWith(.unset)
+    }
+    
+    var confPasswordStateStream: Observable<FieldState> {
+        return Observable.combineLatest(passwordTextStream, confPasswordTextStream) {
             return ($0, $1)
             }
             .map (validConfPassword).startWith(.unset)
-        
-        signUpButtonEnabledStream = [nameStateStream, emailStateStream, passwordStateStream, confPasswordStateStream].combineLatest { states in
+    }
+    
+    var signUpButtonEnabledStream: Observable<Bool> {
+        return [nameStateStream, emailStateStream, passwordStateStream, confPasswordStateStream].combineLatest { states in
             return states.reduce(true, combine: allValid)
         }
     }
     
-    func setNameText(nameText: Observable<String>, emailText: Observable<String>, passwordText: Observable<String>, confPasswordText: Observable<String>, signupTapped: Observable<Bool>) {
-        disposeBag
-            ++ nameTextStream <~ nameText
-            ++ emailTextStream <~ emailText
-            ++ passwordTextStream <~ passwordText
-            ++ confPasswordTextStream <~ confPasswordText
-            ++ events <~ signupTapped
-                .map { _ in return AppEvent.registrationComplete }
-        
-    }
+    let events = PublishSubject<AppEvent>()
     
+    //incoming streams
+    let nameTextStream = PublishSubject<String>()
+    let emailTextStream = PublishSubject<String>()
+    let passwordTextStream = PublishSubject<String>()
+    let confPasswordTextStream = PublishSubject<String>()
+    let signupTappedStream = PublishSubject<Bool>()
+    private let disposeBag = DisposeBag()
+    init () {
+        disposeBag
+            ++ events <~ signupTappedStream
+                .map { _ in return AppEvent.registrationComplete }
+    }
 }
 
 private func validName(name: String) -> FieldState {

@@ -6,18 +6,20 @@
 //  Copyright © 2016 13bit consulting. All rights reserved.
 //
 import RxSwift
+import RxSugar
 import TBAppScaffold
 
 struct RegistrationWiring: Wiring {
     let viewModel = RegistrationViewModel()
     func wire(registrationView: RegistrationViewController) {
         registrationView.viewModel = viewModel
-        viewModel
-            .setNameText(registrationView.nameText,
-                         emailText: registrationView.emailText,
-                         passwordText: registrationView.passwordText,
-                         confPasswordText: registrationView.confPasswordText,
-                         signupTapped: registrationView.signupButtonTapped)
+        registrationView.disposeBag
+            ++ viewModel.nameTextStream <~ registrationView.nameText
+            ++ viewModel.emailTextStream <~ registrationView.emailText
+            ++ viewModel.passwordTextStream <~ registrationView.passwordText
+            ++ viewModel.confPasswordTextStream <~ registrationView.confPasswordText
+            ++ viewModel.signupTappedStream <~ registrationView.signupButtonTapped
+        
         registrationView
             .setNameState(viewModel.nameStateStream,
                           emailState: viewModel.emailStateStream,

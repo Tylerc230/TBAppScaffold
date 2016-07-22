@@ -46,7 +46,7 @@ class RegistrationViewController: UIViewController {
     
     @IBOutlet private var signUpButton: UIButton!
     var viewModel: RegistrationViewModel? = nil
-    private let disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     
     func setNameState(nameState: Observable<FieldState>, emailState: Observable<FieldState>, passwordState: Observable<FieldState>, confPasswordState: Observable<FieldState>, signUpButtonEnabledState: Observable<Bool>) {
         disposeBag
