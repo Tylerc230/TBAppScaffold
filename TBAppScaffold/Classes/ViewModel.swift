@@ -9,5 +9,5 @@
 import RxSwift
 public protocol ViewModel {
     associatedtype Event
-    var events: PublishSubject<Event> { get }
+    var events: Observable<Event> { get }
 }

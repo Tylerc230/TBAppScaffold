@@ -12,17 +12,14 @@ import RxSugar
 import TBAppScaffold
 
 struct LandingViewModel: ViewModel {
-    let events = PublishSubject<AppEvent>()
-    let disposeBag = DisposeBag();
-    func setRegistrationButtonTaps(registrationTaps: Observable<Bool>) {
-        disposeBag
-            ++ events <~ registrationTaps
-                .map{ _ in AppEvent.registrationSelected}
+    var events: Observable<AppEvent> {
+        return [
+            registrationTaps.map { _ in AppEvent.registrationSelected },
+            signInTaps.map { _ in AppEvent.signInSelected }
+        ]
+            .toObservable()
+            .merge()
     }
-    
-    func setSignInButtonTaps(signInTaps: Observable<Bool>) {
-        disposeBag
-            ++ events <~ signInTaps
-                .map { _ in AppEvent.signInSelected}
-    }
+    let registrationTaps = PublishSubject<Bool>()
+    let signInTaps = PublishSubject<Bool>()
 }

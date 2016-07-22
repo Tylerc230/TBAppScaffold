@@ -9,6 +9,8 @@ import RxSwift
 import TBAppScaffold
 
 struct MainAppViewModel: ViewModel {
-    let events = PublishSubject<AppEvent>()
+    var events: Observable<AppEvent> {
+        return PublishSubject()
+    }
     
 }

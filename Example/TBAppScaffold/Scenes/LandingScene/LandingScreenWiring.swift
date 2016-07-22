@@ -7,13 +7,15 @@
 //
 
 import RxSwift
+import RxSugar
 import TBAppScaffold
 
 struct LandingScreenWiring: Wiring {
     let viewModel = LandingViewModel()
     func wire(landingView: LandingViewController) {
-        viewModel.setSignInButtonTaps(landingView.signInButtonTapped)
-        viewModel.setRegistrationButtonTaps(landingView.registerButtonTapped)
+        landingView.disposeBag
+            ++ viewModel.signInTaps <~ landingView.signInButtonTapped
+            ++ viewModel.registrationTaps <~ landingView.registerButtonTapped
         landingView.viewModel = viewModel
     }
 }

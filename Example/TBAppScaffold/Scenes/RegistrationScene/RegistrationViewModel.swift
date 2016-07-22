@@ -42,7 +42,10 @@ struct RegistrationViewModel: ViewModel {
         }
     }
     
-    let events = PublishSubject<AppEvent>()
+    var events: Observable<AppEvent> {
+        return signupTappedStream
+            .map { _ in return AppEvent.registrationComplete }
+    }
     
     //incoming streams
     let nameTextStream = PublishSubject<String>()
@@ -50,12 +53,6 @@ struct RegistrationViewModel: ViewModel {
     let passwordTextStream = PublishSubject<String>()
     let confPasswordTextStream = PublishSubject<String>()
     let signupTappedStream = PublishSubject<Bool>()
-    private let disposeBag = DisposeBag()
-    init () {
-        disposeBag
-            ++ events <~ signupTappedStream
-                .map { _ in return AppEvent.registrationComplete }
-    }
 }
 
 private func validName(name: String) -> FieldState {
