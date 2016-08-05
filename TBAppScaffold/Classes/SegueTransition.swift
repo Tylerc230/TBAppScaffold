@@ -7,29 +7,28 @@
 //
 
 import RxSwift
+import RxSugar
 
 public protocol SegueIdType {
     var identifier: String { get }
 }
 
 public struct SegueTransition<W: Wiring, S: SegueIdType>: Transition {
-    typealias DestinationViewController = W.ViewController
-    let sourceViewController: UIViewController
+    let source: UIViewController
+    public var destination: Observable<UIViewController> {
+        return destinationSubject.asObservable()
+    }
+    private let destinationSubject = ReplaySubject<UIViewController>.create(bufferSize: 1)
     let segueId: S
     public let wiring: W
     public init(sourceViewController: UIViewController, segueId: S, wiring: W) {
-        self.sourceViewController = sourceViewController
+        self.source = sourceViewController
         self.segueId = segueId
         self.wiring = wiring
+        self.destinationSubject <~ sourceViewController.prepareForSegue
     }
     
-    public func performTransition() -> Observable<UIViewController> {
-        var destination: UIViewController? = nil
-        let disposable = sourceViewController.prepareForSegue.subscribeNext { (viewController) in
-            destination = viewController
-        }
-        self.sourceViewController.performSegueWithIdentifier(self.segueId.identifier, sender: self.sourceViewController)
-        disposable.dispose()
-        return Observable.just(destination!)
+    public func performTransition() {
+        source.performSegueWithIdentifier(self.segueId.identifier, sender: self.source)
     }
 }

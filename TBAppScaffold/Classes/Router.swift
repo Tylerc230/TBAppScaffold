@@ -25,27 +25,34 @@ public class Router<Event> {
     }
     
     private func setupRx(eventTransitionMap: EventTransitionMap) {
-        currentEventStream
+        let transitions = currentEventStream
             .asObservable()
             .map (eventTransitionMap)//Map an event to a transition object
-            .flatMap{ (transition)  in
-                return transition.performTransition().map {destination in (transition, destination) }
-            }
-            .flatMap{ transition, destination in
+            .shareReplay(1)
+        
+        transitions
+            .subscribeNext { (transition) in
+                transition.performTransition()
+                self.addNewEventStream(transition.eventStream(), destination: transition.destination)
+        }
+        .addDisposableTo(disposeBag)
+        
+        transitions
+            .flatMap { transition in
+                return transition.destination.map { (transition, $0) }
+        }
+            .flatMap { (transition, destination) in
                 return destination.viewLoaded.map { _ in (transition, destination) }
-            }
-            .doOnNext { (transition, destination) in
-                return transition.wireViewModel(to: destination)
-            }
-            .subscribeNext{ (transition, destination) in
-                self.addNewEventStream(transition, destination: destination)
-            }
-            .addDisposableTo(disposeBag)
+        }
+        .subscribeNext { (transition, destination) in
+            transition.wireViewModel(to: destination)
+        }
+        .addDisposableTo(disposeBag)
     }
     
-    private func addNewEventStream(transition: AnyTransition<Event>, destination: UIViewController) {
+    private func addNewEventStream(eventStream: Observable<Event>, destination: Observable<UIViewController>) {
         disposeBag
-            ++ currentEventStream <~ Observable.combineLatest(Observable.just(destination), transition.eventStream()) {
+            ++ currentEventStream <~ Observable.combineLatest(destination, eventStream) {
                 return ($0, $1)
         }
         

@@ -11,18 +11,22 @@ import RxSwift
 public struct ManualTransition<W: Wiring>: Transition {
     typealias DestinationViewController = W.ViewController
     public typealias TransitionOperation = () -> DestinationViewController
-    let sourceViewController: UIViewController
+    let source: UIViewController
+    private let destinationSubject = BehaviorSubject<UIViewController?>(value: nil)
+    public var destination: Observable<UIViewController> {
+        return destinationSubject.unwrap()
+    }
     public let wiring: W
     let transitionOperation: TransitionOperation
     
     public init(sourceViewController: UIViewController, wiring: W, transitionOperation: TransitionOperation) {
-        self.sourceViewController = sourceViewController
+        self.source = sourceViewController
         self.wiring = wiring
         self.transitionOperation = transitionOperation
     }
     
-    public func performTransition() -> Observable<UIViewController> {
+    public func performTransition()  {
         let destinationViewController = transitionOperation()
-        return Observable.just(destinationViewController)
+        destinationSubject.onNext(destinationViewController)
     }
 }

@@ -12,7 +12,8 @@ import RxSwift
 public protocol Transition {
     associatedtype W: Wiring
     var wiring: W { get }
-    func performTransition() -> Observable<UIViewController>
+    var destination: Observable<UIViewController> { get }
+    func performTransition()
     func eventStream() -> Observable<W.Model.Event>
 }
 
@@ -27,18 +28,20 @@ extension Transition {
 }
 
 public struct AnyTransition<Event> {
-    let performTransitionClosure: () -> (Observable<UIViewController>)
-    let eventStreamClosure: () -> Observable<Event>
-    let wireViewModelClosure: (viewController: UIViewController) -> ()
+    let destination: Observable<UIViewController>
+    private let performTransitionClosure: () -> ()
+    private let eventStreamClosure: () -> Observable<Event>
+    private let wireViewModelClosure: (viewController: UIViewController) -> ()
     public init<T: Transition where T.W.Model.Event == Event>(transition: T) {
         performTransitionClosure = transition.performTransition
         eventStreamClosure = transition.eventStream
         wireViewModelClosure = { viewController in
             transition.wireViewModel(to: viewController as! T.W.ViewController)
         }
+        destination = transition.destination
     }
     
-    func performTransition() -> Observable<UIViewController> {
+    func performTransition() {
         return performTransitionClosure()
     }
     
