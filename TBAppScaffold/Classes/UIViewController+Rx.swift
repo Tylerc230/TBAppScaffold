@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-extension UIViewController {
+public extension UIViewController {
     var prepareForSegue: Observable<UIViewController> {
         let selector = #selector(UIViewController.prepareForSegue(_:sender:))
         return rx_sentMessage(selector).map { parameters  in
@@ -21,6 +21,11 @@ extension UIViewController {
     
     var viewLoaded: Observable<UIViewController> {
         let selector = #selector(UIViewController.viewDidLoad)
-        return rx_sentMessage(selector).map {_ in self}.take(1)
+        return rx_sentMessage(selector).mapTo(self).take(1)
+    }
+    
+    var viewWillAppear: Observable<Void> {
+        let selector = #selector(UIViewController.viewWillAppear(_:))
+        return rx_sentMessage(selector).mapTo(Void())
     }
 }
