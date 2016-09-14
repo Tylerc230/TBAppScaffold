@@ -30,12 +30,6 @@ public class Router<Event> {
             .map (eventTransitionMap)//Map an event to a transition object
             .shareReplay(1)
         
-        transitions
-            .subscribeNext { (transition) in
-                transition.performTransition()
-                self.addNewEventStream(transition.eventStream(), destination: transition.destination)
-        }
-        .addDisposableTo(disposeBag)
         
         transitions
             .flatMap { transition in
@@ -48,6 +42,13 @@ public class Router<Event> {
             transition.wireViewModel(to: destination)
         }
         .addDisposableTo(disposeBag)
+        
+        transitions
+            .subscribeNext { (transition) in
+                transition.performTransition()
+                self.addNewEventStream(transition.eventStream(), destination: transition.destination)
+            }
+            .addDisposableTo(disposeBag)
     }
     
     private func addNewEventStream(eventStream: Observable<Event>, destination: Observable<UIViewController>) {
