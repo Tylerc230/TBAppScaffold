@@ -8,7 +8,7 @@
 
 import RxSwift
 
-public struct ManualTransition<W: Wiring>: Transition {
+public struct ManualTransition<W: Wiring>: PresentTransition {
     typealias DestinationViewController = W.ViewController
     public typealias TransitionOperation = () -> DestinationViewController
     let source: UIViewController

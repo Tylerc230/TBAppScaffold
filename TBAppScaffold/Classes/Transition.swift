@@ -10,14 +10,21 @@ import UIKit
 import RxSwift
 
 public protocol Transition {
-    associatedtype W: Wiring
-    var wiring: W { get }
     var destination: Observable<UIViewController> { get }
     func performTransition()
+}
+
+public protocol PresentTransition: Transition {
+    associatedtype W: Wiring
+    var wiring: W { get }
     func eventStream() -> Observable<W.Model.Event>
 }
 
-extension Transition {
+public protocol DismissTransition: Transition {
+    
+}
+
+extension PresentTransition {
     public func eventStream() -> Observable<W.Model.Event> {
         return wiring.eventStream()
     }
@@ -32,7 +39,7 @@ public struct AnyTransition<Event> {
     private let performTransitionClosure: () -> ()
     private let eventStreamClosure: () -> Observable<Event>
     private let wireViewModelClosure: (viewController: UIViewController) -> ()
-    public init<T: Transition where T.W.Model.Event == Event>(transition: T) {
+    public init<T: PresentTransition where T.W.Model.Event == Event>(transition: T) {
         performTransitionClosure = transition.performTransition
         eventStreamClosure = transition.eventStream
         wireViewModelClosure = { viewController in
@@ -40,13 +47,20 @@ public struct AnyTransition<Event> {
         }
         destination = transition.destination
     }
+
+    public init<T: DismissTransition>(transition: T) {
+        performTransitionClosure = transition.performTransition
+        destination = transition.destination
+        wireViewModelClosure = {_ in }
+        eventStreamClosure = {Observable<Event>.never()}
+    }
     
     func performTransition() {
-        return performTransitionClosure()
+        performTransitionClosure()
     }
     
     func wireViewModel(to viewController: UIViewController) {
-        return wireViewModelClosure(viewController: viewController)
+        wireViewModelClosure(viewController: viewController)
     }
     
     func eventStream() -> Observable<Event> {

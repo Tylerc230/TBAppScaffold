@@ -13,7 +13,7 @@ public protocol SegueIdType {
     var identifier: String { get }
 }
 
-public struct SegueTransition<W: Wiring, S: SegueIdType>: Transition {
+public struct SegueTransition<W: Wiring, S: SegueIdType>: PresentTransition {
     let source: UIViewController
     public var destination: Observable<UIViewController> {
         return destinationSubject.asObservable()
