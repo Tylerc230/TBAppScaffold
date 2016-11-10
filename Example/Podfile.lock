@@ -1,11 +1,11 @@
 PODS:
-  - RxCocoa (2.6.0):
-    - RxSwift (~> 2.5)
-  - RxSugar (0.0.10):
-    - RxSwift (~> 2.3)
-  - RxSwift (2.6.0)
-  - RxSwiftExt (1.0.1):
-    - RxSwift (~> 2.1)
+  - RxCocoa (3.0.1):
+    - RxSwift (~> 3.0)
+  - RxSugar (0.1.1):
+    - RxSwift (~> 3.0)
+  - RxSwift (3.0.1)
+  - RxSwiftExt (2.0.0):
+    - RxSwift (~> 3.0.0)
   - TBAppScaffold (0.1.0):
     - RxCocoa
     - RxSugar
@@ -20,10 +20,10 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
-  RxSugar: 92324a788e2f6fa9843083bcd22353af7c6503cc
-  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
-  RxSwiftExt: 308a5f411533c7660da8317cb1b44161f9181ba4
+  RxCocoa: 15a52fc590dcc700cb4a690a633b5c5184ce3a78
+  RxSugar: 353380861f482623e0734c85baca4a76d437a285
+  RxSwift: af5680055c4ad04480189c52d28385b1029493a6
+  RxSwiftExt: 5dd3c7e0fd64ddb5014e094d524d167f7496b2e5
   TBAppScaffold: 530be401d69cea76ed73aad3f01f8cc756b4199d
 
 PODFILE CHECKSUM: e7b23a017a755eb8e926d285f67786b29001c437

@@ -13,59 +13,59 @@ import RxSugar
 
 class RegistrationViewController: UIViewController {
     var nameText: Observable<String> {
-        return nameTextField.rx_text.asObservable()
+        return nameTextField.rx.text.asObservable().ignoreNil()
     }
     
     var emailText: Observable<String> {
-        return emailTextField.rx_text.asObservable()
+        return emailTextField.rx.text.asObservable().ignoreNil()
     }
     
     var passwordText: Observable<String> {
-        return passwordTextField.rx_text.asObservable()
+        return passwordTextField.rx.text.asObservable().ignoreNil()
     }
     
     var confPasswordText: Observable<String> {
-        return confPasswordTextField.rx_text.asObservable()
+        return confPasswordTextField.rx.text.asObservable().ignoreNil()
     }
     
     var signupButtonTapped: Observable<Bool> {
-        return signUpButton.rx_tap.map { true }
+        return signUpButton.rx.tap.map { true }
     }
     
-    @IBOutlet private var nameTextField: UITextField!
-    @IBOutlet private var nameStateView: UIView!
+    @IBOutlet fileprivate var nameTextField: UITextField!
+    @IBOutlet fileprivate var nameStateView: UIView!
     
-    @IBOutlet private var emailTextField: UITextField!
-    @IBOutlet private var emailStateView: UIView!
+    @IBOutlet fileprivate var emailTextField: UITextField!
+    @IBOutlet fileprivate var emailStateView: UIView!
     
-    @IBOutlet private var passwordTextField: UITextField!
-    @IBOutlet private var passwordStateView: UIView!
+    @IBOutlet fileprivate var passwordTextField: UITextField!
+    @IBOutlet fileprivate var passwordStateView: UIView!
     
-    @IBOutlet private var confPasswordTextField: UITextField!
-    @IBOutlet private var confPasswordStateView: UIView!
+    @IBOutlet fileprivate var confPasswordTextField: UITextField!
+    @IBOutlet fileprivate var confPasswordStateView: UIView!
     
-    @IBOutlet private var signUpButton: UIButton!
+    @IBOutlet fileprivate var signUpButton: UIButton!
     var viewModel: RegistrationViewModel? = nil
     let disposeBag = DisposeBag()
     
-    func setNameState(nameState: Observable<FieldState>, emailState: Observable<FieldState>, passwordState: Observable<FieldState>, confPasswordState: Observable<FieldState>, signUpButtonEnabledState: Observable<Bool>) {
+    func setNameState(_ nameState: Observable<FieldState>, emailState: Observable<FieldState>, passwordState: Observable<FieldState>, confPasswordState: Observable<FieldState>, signUpButtonEnabledState: Observable<Bool>) {
         disposeBag
             ++ nameStateView.rx_backgroundColor <~ nameState.map(stateToColor)
             ++ emailStateView.rx_backgroundColor <~ emailState.map(stateToColor)
             ++ passwordStateView.rx_backgroundColor <~ passwordState.map(stateToColor)
             ++ confPasswordStateView.rx_backgroundColor <~ confPasswordState.map(stateToColor)
-            ++ signUpButton.rx_enabled <~ signUpButtonEnabledState
+            ++ signUpButton.rx.isEnabled <~ signUpButtonEnabledState
     }
 }
 
-private func stateToColor(fieldState: FieldState) -> UIColor {
+private func stateToColor(_ fieldState: FieldState) -> UIColor {
     switch fieldState {
     case .unset:
-        return UIColor.clearColor()
+        return UIColor.clear
     case .invalid:
-        return UIColor.redColor()
+        return UIColor.red
     case .valid:
-        return UIColor.greenColor()
+        return UIColor.green
     }
 }
 

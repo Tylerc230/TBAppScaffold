@@ -11,7 +11,7 @@ import TBAppScaffold
 
 struct RegistrationWiring: Wiring {
     let viewModel = RegistrationViewModel()
-    func wire(registrationView: RegistrationViewController) {
+    func wire(_ registrationView: RegistrationViewController) {
         registrationView.viewModel = viewModel
         registrationView.disposeBag
             ++ viewModel.nameTextStream <~ registrationView.nameText

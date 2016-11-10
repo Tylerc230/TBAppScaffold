@@ -11,49 +11,48 @@ import RxSwiftExt
 import RxCocoa
 import RxSugar
 
-public class Router<Event> {
+open class Router<Event> {
     public typealias SourcedEvent = (source: UIViewController, event: Event)
-    public typealias EventTransitionMap = SourcedEvent -> AnyTransition<Event>
+    public typealias EventTransitionMap = (SourcedEvent) -> AnyTransition<Event>
     let disposeBag = DisposeBag()
     let currentEventStream = PublishSubject<SourcedEvent>()
-    public init(eventTransitionMap: EventTransitionMap) {
+    public init(eventTransitionMap: @escaping EventTransitionMap) {
         setupRx(eventTransitionMap)
     }
     
-    public func sendEvent(event: Event, withSource source: UIViewController) {
+    open func sendEvent(_ event: Event, withSource source: UIViewController) {
         currentEventStream.onNext((source, event))
     }
     
-    private func setupRx(eventTransitionMap: EventTransitionMap) {
+    fileprivate func setupRx(_ eventTransitionMap: @escaping EventTransitionMap) {
         let transitions = currentEventStream
             .asObservable()
             .map (eventTransitionMap)//Map an event to a transition object
             .shareReplay(1)
         
-        
         transitions
             .flatMap { transition in
                 return transition.destination.map { (transition, $0) }
-        }
+            }
             .flatMap { (transition, destination) in
                 return destination.viewLoaded.map { _ in (transition, destination) }
-        }
-        .subscribeNext { (transition, destination) in
-            transition.wireViewModel(to: destination)
-        }
-        .addDisposableTo(disposeBag)
+            }
+            .subscribe(onNext: { (transition, destination) in
+                transition.wireViewModel(to: destination)
+            })
+            .addDisposableTo(disposeBag)
         
         transitions
-            .subscribeNext { (transition) in
+            .subscribe(onNext: { (transition) in
                 transition.performTransition()
                 self.addNewEventStream(transition.eventStream(), destination: transition.destination)
-            }
+            })
             .addDisposableTo(disposeBag)
     }
     
-    private func addNewEventStream(eventStream: Observable<Event>, destination: Observable<UIViewController>) {
+    fileprivate func addNewEventStream(_ eventStream: Observable<Event>, destination: Observable<UIViewController>) {
         disposeBag
-            ++ currentEventStream <~ Observable.combineLatest(destination, eventStream) {
+            ++ currentEventStream <~ Observable<SourcedEvent>.combineLatest(destination, eventStream) {
                 return ($0, $1)
         }
         

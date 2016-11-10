@@ -12,14 +12,14 @@ public struct ManualTransition<W: Wiring>: PresentTransition {
     typealias DestinationViewController = W.ViewController
     public typealias TransitionOperation = () -> DestinationViewController
     let source: UIViewController
-    private let destinationSubject = BehaviorSubject<UIViewController?>(value: nil)
+    fileprivate let destinationSubject = BehaviorSubject<UIViewController?>(value: nil)
     public var destination: Observable<UIViewController> {
         return destinationSubject.unwrap()
     }
     public let wiring: W
     let transitionOperation: TransitionOperation
     
-    public init(sourceViewController: UIViewController, wiring: W, transitionOperation: TransitionOperation) {
+    public init(sourceViewController: UIViewController, wiring: W, transitionOperation: @escaping TransitionOperation) {
         self.source = sourceViewController
         self.wiring = wiring
         self.transitionOperation = transitionOperation

@@ -12,20 +12,20 @@ import RxCocoa
 
 public extension UIViewController {
     var prepareForSegue: Observable<UIViewController> {
-        let selector = #selector(UIViewController.prepareForSegue(_:sender:))
-        return rx_sentMessage(selector).map { parameters  in
+        let selector = #selector(UIViewController.prepare(`for`:sender:))
+        return rx.sentMessage(selector).map { parameters  in
             let segue = parameters.first as! UIStoryboardSegue
-            return segue.destinationViewController
+            return segue.destination
         }
     }
     
     var viewLoaded: Observable<UIViewController> {
         let selector = #selector(UIViewController.viewDidLoad)
-        return rx_sentMessage(selector).mapTo(self).take(1)
+        return rx.sentMessage(selector).mapTo(self).take(1)
     }
     
     var viewWillAppear: Observable<Void> {
         let selector = #selector(UIViewController.viewWillAppear(_:))
-        return rx_sentMessage(selector).mapTo(Void())
+        return rx.sentMessage(selector).mapTo(Void())
     }
 }

@@ -10,7 +10,7 @@ import TBAppScaffold
 
 struct MainAppWiring: Wiring {
     let viewModel = MainAppViewModel()
-    func wire(viewController: MainAppViewController) {
+    func wire(_ viewController: MainAppViewController) {
         
     }
 }

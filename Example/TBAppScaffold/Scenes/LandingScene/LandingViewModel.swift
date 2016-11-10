@@ -13,11 +13,10 @@ import TBAppScaffold
 
 struct LandingViewModel: ViewModel {
     var events: Observable<AppEvent> {
-        return [
+        return Observable.from([
             registrationTaps.map { _ in AppEvent.registrationSelected },
             signInTaps.map { _ in AppEvent.signInSelected }
-        ]
-            .toObservable()
+        ])
             .merge()
     }
     let registrationTaps = PublishSubject<Bool>()

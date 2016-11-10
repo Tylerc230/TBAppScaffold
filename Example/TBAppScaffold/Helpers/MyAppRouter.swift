@@ -20,7 +20,7 @@ enum AppEvent {
     case appLaunched, registrationSelected, signInSelected, registrationComplete, signInComplete
 }
 
-func transitionForEvent(source: UIViewController, event: AppEvent) -> AnyTransition<AppEvent> {
+func transitionForEvent(_ source: UIViewController, event: AppEvent) -> AnyTransition<AppEvent> {
     let sourceViewController = source
     switch event {
     case .registrationComplete, .signInComplete:

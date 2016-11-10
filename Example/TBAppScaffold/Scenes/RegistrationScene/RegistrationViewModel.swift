@@ -38,8 +38,8 @@ struct RegistrationViewModel: ViewModel {
     }
     
     var signUpButtonEnabledStream: Observable<Bool> {
-        return [nameStateStream, emailStateStream, passwordStateStream, confPasswordStateStream].combineLatest { states in
-            return states.reduce(true, combine: allValid)
+        return Observable.combineLatest([nameStateStream, emailStateStream, passwordStateStream, confPasswordStateStream]) { states in
+            return states.reduce(true, allValid)
         }
     }
     
@@ -57,7 +57,7 @@ struct RegistrationViewModel: ViewModel {
     let signupTappedStream = BehaviorSubject<Bool>(value: false)
 }
 
-private func validName(name: String) -> FieldState {
+private func validName(_ name: String) -> FieldState {
     switch name {
     case "":
         return .unset
@@ -68,18 +68,18 @@ private func validName(name: String) -> FieldState {
     }
 }
 
-private func validEmail(email: String) -> FieldState {
+private func validEmail(_ email: String) -> FieldState {
     switch email {
     case "":
         return .unset
-    case _ where email.rangeOfString(".+@.+\\..+", options: .RegularExpressionSearch) == nil:
+    case _ where email.range(of: ".+@.+\\..+", options: .regularExpression) == nil:
         return .invalid
     default:
         return .valid
     }
 }
 
-private func validPassword(password: String) -> FieldState {
+private func validPassword(_ password: String) -> FieldState {
     switch password {
     case "":
         return .unset
@@ -90,7 +90,7 @@ private func validPassword(password: String) -> FieldState {
     }
 }
 
-private func validConfPassword(password: String, confPassword: String) -> FieldState {
+private func validConfPassword(_ password: String, confPassword: String) -> FieldState {
     switch confPassword {
     case "":
         return .unset
@@ -101,7 +101,7 @@ private func validConfPassword(password: String, confPassword: String) -> FieldS
     }
 }
 
-private func allValid(valid: Bool, state: FieldState) -> Bool {
+private func allValid(_ valid: Bool, state: FieldState) -> Bool {
     if state == .valid {
         return valid
     } else {

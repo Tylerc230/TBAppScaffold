@@ -18,7 +18,7 @@ public struct SegueTransition<W: Wiring, S: SegueIdType>: PresentTransition {
     public var destination: Observable<UIViewController> {
         return destinationSubject.asObservable()
     }
-    private let destinationSubject = ReplaySubject<UIViewController>.create(bufferSize: 1)
+    fileprivate let destinationSubject = ReplaySubject<UIViewController>.create(bufferSize: 1)
     let segueId: S
     public let wiring: W
     public init(sourceViewController: UIViewController, segueId: S, wiring: W) {
@@ -29,6 +29,6 @@ public struct SegueTransition<W: Wiring, S: SegueIdType>: PresentTransition {
     }
     
     public func performTransition() {
-        source.performSegueWithIdentifier(self.segueId.identifier, sender: self.source)
+        source.performSegue(withIdentifier: self.segueId.identifier, sender: self.source)
     }
 }

@@ -12,7 +12,7 @@ import TBAppScaffold
 
 struct LandingScreenWiring: Wiring {
     let viewModel = LandingViewModel()
-    func wire(landingView: LandingViewController) {
+    func wire(_ landingView: LandingViewController) {
         landingView.disposeBag
             ++ viewModel.signInTaps <~ landingView.signInButtonTapped
             ++ viewModel.registrationTaps <~ landingView.registerButtonTapped

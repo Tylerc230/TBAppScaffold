@@ -9,7 +9,7 @@ import RxSwift
 public protocol Wiring {
     associatedtype ViewController: UIViewController
     associatedtype Model: ViewModel
-    func wire(viewController: ViewController)
+    func wire(_ viewController: ViewController)
     func eventStream() -> Observable<Model.Event>
     var viewModel: Model { get }
 }

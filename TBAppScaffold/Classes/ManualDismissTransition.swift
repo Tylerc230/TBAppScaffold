@@ -14,6 +14,6 @@ public struct ManualDismissTransition: DismissTransition {
         sourceViewController = source
     }
     public func performTransition() {
-        sourceViewController.dismissViewControllerAnimated(true, completion: nil)
+        sourceViewController.dismiss(animated: true, completion: nil)
     }
 }

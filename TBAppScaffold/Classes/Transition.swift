@@ -36,10 +36,10 @@ extension PresentTransition {
 
 public struct AnyTransition<Event> {
     let destination: Observable<UIViewController>
-    private let performTransitionClosure: () -> ()
-    private let eventStreamClosure: () -> Observable<Event>
-    private let wireViewModelClosure: (viewController: UIViewController) -> ()
-    public init<T: PresentTransition where T.W.Model.Event == Event>(transition: T) {
+    fileprivate let performTransitionClosure: () -> ()
+    fileprivate let eventStreamClosure: () -> Observable<Event>
+    fileprivate let wireViewModelClosure: (_ viewController: UIViewController) -> ()
+    public init<T: PresentTransition>(transition: T) where T.W.Model.Event == Event {
         performTransitionClosure = transition.performTransition
         eventStreamClosure = transition.eventStream
         wireViewModelClosure = { viewController in
@@ -60,7 +60,7 @@ public struct AnyTransition<Event> {
     }
     
     func wireViewModel(to viewController: UIViewController) {
-        wireViewModelClosure(viewController: viewController)
+        wireViewModelClosure(viewController)
     }
     
     func eventStream() -> Observable<Event> {

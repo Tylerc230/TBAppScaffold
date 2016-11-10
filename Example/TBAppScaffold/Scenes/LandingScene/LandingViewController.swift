@@ -16,11 +16,11 @@ class LandingViewController: UIViewController {
     @IBOutlet var registerButton: UIButton! = nil
     var viewModel: LandingViewModel? = nil
     var registerButtonTapped: Observable<Bool> {
-        return registerButton.rx_tap.map { true}
+        return registerButton.rx.tap.map { true}
     }
     
     var signInButtonTapped: Observable<Bool> {
-        return signInButton.rx_tap.map { true }
+        return signInButton.rx.tap.map { true }
     }
     
     let disposeBag = DisposeBag()
